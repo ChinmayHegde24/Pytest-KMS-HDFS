@@ -1,4 +1,4 @@
-#     ----------KMS API & HDFS Encryption Pytest Suite-------------
+#     --KMS API & HDFS Encryption Pytest Suite--
 
 
 This test suite validates REST API endpoints for KMS (Key Management Service) and tests HDFS encryption functionalities including key management and file operations within encryption zones.
