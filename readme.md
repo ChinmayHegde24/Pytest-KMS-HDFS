@@ -6,27 +6,27 @@ This test suite validates REST API endpoints for KMS (Key Management Service) an
 test_kms  : contains test cases for checking KMS API functionality
 test_hdfs : contains test cases for checking hdfs encryption
 
+📂 Directory Structure
+
 test_directory/
-├── test_kms/          : tests on kms API
-├── test_hdfs/         : tests on HDFS encryption cycle
-├── pytest.ini         : registering custom markers
-└── README.md
-
-test_kms/
-├── test_keys.py       : checks for successful key creation and key name validation
-├── test_keyDetails.py : checks on getKeyName, getKeyMetadata, getKeyVersion
-├── test_keyOps.py     : checks on key operation like Roll-over, generate DEK, Decrypt EDEK
-├── conftest.py        : for resusability of code
-├── utils.py           : utility method
-
-test_hdfs/
-├── test_encryption.py : checks on full hdfs encryption cycle
+├── test_kms/              # Tests on KMS API
+│   ├── test_keys.py       # Key creation and key name validation
+│   ├── test_keyDetails.py # getKeyName, getKeyMetadata, getKeyVersion checks
+│   ├── test_keyOps.py     # Key operations: Roll-over, generate DEK, Decrypt EDEK
+│   ├── conftest.py        # Reusable fixtures and setup
+│   └── utils.py           # Utility methods
+│
+├── test_hdfs/             # Tests on HDFS encryption cycle
+│   └── test_encryption.py # Full HDFS encryption cycle testing
+│
+├── pytest.ini             # Registers custom pytest markers
+└── README.md              # This file
 
 
-# SetUp
+⚙️ Setup Instructions
+Bring up KMS container and any dependent containers using Docker.
+Create a virtual environment and install the necessary packages: requests pytest docker
 
-Bring up KMS container and dependent containers
-Create one venv and install necessary packages : requests, pytest, docker 
 Further Environment setup  done in test suite itself no need to add extra things
 
 # Run test cases
@@ -50,6 +50,10 @@ or
 >pytest -vs test_hdfs/
 
 With report >pytest -vs test_hdfs/ --html=hdfs-report.html
+
+📌 Notes
+Ensure Docker containers for KMS and HDFS are running before executing tests.
+Reports generated using --html can be viewed in any browser for detailed test results.
 
 
 
