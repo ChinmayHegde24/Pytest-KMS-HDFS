@@ -34,7 +34,7 @@ has a class TestKeyManagement consisting of two methods
   
   **2.test_key_name_validation :**  validates creation of key with different valid and invalid name format 
 
-               similarly different kind of validation can be done upon the key
+similarly different kind of validation can be done upon the key
 
 ## test_keyDetails.py
 Handles retrieval of key related data
