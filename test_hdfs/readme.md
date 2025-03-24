@@ -1,4 +1,4 @@
-# This is the main directory of testing HDFS encryption cycle 
+# This is the main directory for testing HDFS encryption cycle 
 
 ## Structure
 ```
@@ -12,13 +12,17 @@ Markers: Markers have been used which helps in running only specific test cases
 ## `test_encryption.py`
         
  **main highlights :** 
- Encryption zone creation in HDFS 
- Giving permissions to specific user over read write operation on the file present in created Encryption zone (EZ)
+ Encryption zone creation in HDFS
+ 
+ Giving permissions to specific user over read write operation on the file present in the created Encryption zone (EZ)
+ 
  Read-write operation by unauthorised user in EZ
 
 **setup_environment:** 
 After bringing up containers some extra things needs to be done before directly running test cases
+
 As HDFS needs to communicate with KMS to fetch key details , adding some KMS_PROPERTY in core-site.xml file
+
 Restarting conatiner to bring new added changes
 
 **get_error_logs :**             fetches logs from both KMS and HDFS container and displays in the case of some errors and exceptions while testing
@@ -33,6 +37,7 @@ Restarting conatiner to bring new added changes
 
 **Negative test cases**
 **test_unauthorized_write    :** checks write functionality by unauth user (i.e HBASE in this case)
+
 **test_unauthorized_read     :** checks read functionality by unauth user
 
 **test_cleanup               :** final cleanup of EZ and files present in it
