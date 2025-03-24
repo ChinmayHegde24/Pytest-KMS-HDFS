@@ -8,19 +8,8 @@ test_hdfs : contains test cases for checking hdfs encryption
 
 📂 Directory Structure
 
-test_directory/
-├── test_kms/              # Tests on KMS API
-│   ├── test_keys.py       # Key creation and key name validation
-│   ├── test_keyDetails.py # getKeyName, getKeyMetadata, getKeyVersion checks
-│   ├── test_keyOps.py     # Key operations: Roll-over, generate DEK, Decrypt EDEK
-│   ├── conftest.py        # Reusable fixtures and setup
-│   └── utils.py           # Utility methods
-│
-├── test_hdfs/             # Tests on HDFS encryption cycle
-│   └── test_encryption.py # Full HDFS encryption cycle testing
-│
-├── pytest.ini             # Registers custom pytest markers
-└── README.md              # This file
+```
+test_directory/ ├── test_kms/ # Tests on KMS API │ ├── test_keys.py # Key creation and key name validation │ ├── test_keyDetails.py # getKeyName, getKeyMetadata, getKeyVersion checks │ ├── test_keyOps.py # Key operations: Roll-over, generate DEK, Decrypt EDEK │ ├── conftest.py # Reusable fixtures and setup │ └── utils.py # Utility methods │ ├── test_hdfs/ # Tests on HDFS encryption cycle │ └── test_encryption.py # Full HDFS encryption cycle testing │ ├── pytest.ini # Registers custom pytest markers └── README.md # This file ```
 
 
 ⚙️ Setup Instructions
