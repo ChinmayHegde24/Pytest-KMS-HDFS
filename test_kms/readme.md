@@ -12,7 +12,9 @@ test_kms/
 
 ## Extra features and functionalities used:
   **Parametrization :** for running multiple test cases handling same functionality in single method
+  
   **fetch_logs      :** fetches errors or exception from logs when something goes wrong
+  
   **cleanup         :** cleaning of all resources used while testing ensuring re-runs of test cases
 
 
@@ -29,6 +31,7 @@ test_kms/
                Handles key creation operation
                has a class TestKeyManagement consisting of two methods 
   **1.test_create_key          :**  used to create key with necessary payload ,checks for error in that & cleans up created key
+  
   **2.test_key_name_validation :**  validates creation of key with different valid and invalid name format 
 
                similarly different kind of validation can be done upon the key
