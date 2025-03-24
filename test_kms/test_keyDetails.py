@@ -30,7 +30,6 @@ class TestKeyDetails:
     def test_get_key_metadata(self, headers, key_name, expected_status, expected_response):
     
         response = requests.get(f"{BASE_URL}/key/{key_name}/_metadata", headers=headers, params=PARAMS)
-        # assert response.status_code == expected_status          # giving error bcz of some changes I made in repo , not now after response.text
  
         if response.status_code!=expected_status:                  #log check
             logs=fetch_logs()           
@@ -43,8 +42,8 @@ class TestKeyDetails:
 
 
     @pytest.mark.parametrize("key_name, expected_status, expected_response", [
-        ("my_key", 200, "valid"),  # Key exists
-        ("non-existent-key", 200,"invalid"),  # Misleading response for non-existent key gives 200 shouldve given 404
+        ("my_key", 200, "valid"),             # Key exists
+        ("non-existent-key", 200,"invalid"),  # Misleading response for non-existent key gives 200 should've given 404
     ])
     def test_get_key_versions(self, headers, key_name, expected_status,expected_response):
 
