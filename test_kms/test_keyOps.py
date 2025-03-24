@@ -8,7 +8,7 @@ PARAMS = {"user.name": "keyadmin"}
 @pytest.mark.usefixtures("create_test_key")
 class TestKeyOperations:
     
-    def test_temp_key(self, headers):             #temp key for testing roll over 
+    def test_temp_key(self, headers):             #temporary key for testing roll over 
         data = {
             "name": "rollover-key",
             "cipher": "AES/CTR/NoPadding",
