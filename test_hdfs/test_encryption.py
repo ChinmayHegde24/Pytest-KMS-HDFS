@@ -1,5 +1,7 @@
 import pytest
 import docker
+import requests
+from utils import fetch_logs 
 
 import time
 from docker.errors import APIError
@@ -11,6 +13,9 @@ HADOOP_CONTAINER = "ranger-hadoop"
 KMS_CONTAINER = "ranger-kms"
 HDFS_USER = "hdfs"
 HIVE_USER = "hive"
+HEADERS={"Content-Type": "application/json","Accept":"application/json"}
+PARAMS={"user.name":"keyadmin"}
+BASE_URL="http://localhost:9292/kms/v1"
 
 # Constants
 KMS_PROPERTY = """<property><name>hadoop.security.key.provider.path</name><value>kms://http@host.docker.internal:9292/kms</value></property>"""
@@ -36,7 +41,7 @@ def setup_environment():
         exit_code, output = hadoop_container.exec_run(insert_cmd, user='root')
         print(f"KMS property inserted. Exit code: {exit_code}")
 
-             # Debug: Show updated file
+        # Debug: Show updated file
         cat_cmd = f"cat {CORE_SITE_XML_PATH}"
         _, file_content = hadoop_container.exec_run(cat_cmd, user='root')
         print("Updated core-site.xml:\n", file_content.decode())
@@ -58,15 +63,13 @@ def setup_environment():
 
     yield  # Run tests
 
-    # Post-test cleanup (optional)
+    # Post-test cleanup
     print("Tests completed.")
 
 @pytest.fixture(scope="module")
 def hadoop_container():
     container = client.containers.get(HADOOP_CONTAINER)      #to get hadoop container instance
     return container
-
-
 
 def get_error_logs(hadoop_container, kms_container):
 
@@ -109,6 +112,20 @@ def run_command(container, cmd, user):
             """)
         return output_response
 
+def test_create_key():
+        key_data = {
+            "name": "my_key",
+            "cipher": "AES/CTR/NoPadding",
+            "length": 128,
+            "description": "test key for hdfs encryption in pytest"
+        }
+      
+        response = requests.post(f"{BASE_URL}/keys",headers=HEADERS, json=key_data,params=PARAMS)
+        print(response.json())
+
+        if response.status_code != 201:
+            error_logs = fetch_logs()  # Fetch logs on failure
+            pytest.fail(f"Key creation failed. API Response: {response.text}\nLogs:\n{error_logs}")
 
 
 
@@ -142,8 +159,7 @@ def test_grant_permissions(hadoop_container):
 def test_hive_user_write_read(hadoop_container):
 
     create_file = 'bash -c \'echo "Hello, this is a third file!" > /home/hive/testfile2.txt && ls -l /home/hive/testfile2.txt\''
-    # exit_code, output = hadoop_container.exec_run(create_file, user=HIVE_USER)
-    # assert exit_code == 0, f"Failed to create file\nOutput: {output.decode()}"
+
     output = run_command(hadoop_container,create_file,HIVE_USER)
     print(output)
 
@@ -164,8 +180,6 @@ def test_unauthorized_write(hadoop_container):
     output = run_command(hadoop_container,unauth_write,"hbase")
     print(output)
     
-    # assert exit_code != 0, f" Unauthorized write succeeded!\nOutput: {output.decode()}"
-    # print(output.decode())
     
 # Negative Test - Unauthorized User Cannot Read
 def test_unauthorized_read(hadoop_container):
@@ -184,5 +198,7 @@ def test_cleanup(hadoop_container):
     for cmd in commands:
         output = run_command(hadoop_container,cmd,HDFS_USER)
         print(output)
+
+    requests.delete(f"{BASE_URL}/key/my_key",params=PARAMS)               #cleanup my_key
 
 
