@@ -6,41 +6,83 @@ test_hdfs/
 ├── test_encryption.py
 ├── utils.py              #Utility methods
 ```
-## Extra features
-Markers: Markers have been used which helps in running only specific test cases
+
+---
+
+## Extra Features
+
+- **Markers:**  
+  Markers have been used to selectively run specific test cases, improving test efficiency and organization.
+
+---
 
 ## `test_encryption.py`
-        
- **main highlights :** 
- Encryption zone creation in HDFS
- 
- Giving permissions to specific user over read write operation on the file present in the created Encryption zone (EZ)
- 
- Read-write operation by unauthorised user in EZ
 
-**setup_environment:** 
-After bringing up containers some extra things needs to be done before directly running test cases
+Handles the **full HDFS encryption cycle**, including setup, positive and negative test scenarios, and cleanup.
 
-As HDFS needs to communicate with KMS to fetch key details , adding some KMS_PROPERTY in core-site.xml file
+### Main Highlights:
+- Encryption Zone (EZ) creation in HDFS.
+- Granting permissions to specific users for read/write operations within the EZ.
+- Validating read/write attempts by unauthorized users inside the EZ.
 
-Restarting conatiner to bring new added changes
+---
 
-**get_error_logs :**             fetches logs from both KMS and HDFS container and displays in the case of some errors and exceptions while testing
+### `setup_environment`
 
-**run_command :**                method which handles running of all HDFS commands inside container
+Before running the test cases, some environment configurations are needed:
+- HDFS must communicate with KMS to fetch key details.
+- Specific KMS properties are added to the `core-site.xml` file.
+- Containers are restarted to apply the changes effectively.
 
-**test_create_encryption_zone:** here EZ gets created using existing EZ key
+---
 
-**test_grant_permissions     :** granting read-write permission for specific users (i.e HIVE in this case)
+### Utility Methods
 
-**test_hive_user_write_read  :** performing write and read operation inside EZ
+- **get_error_logs:**  
+  Fetches logs from both KMS and HDFS containers. Helps in identifying issues when errors or exceptions occur during testing.
 
-**Negative test cases**
-**test_unauthorized_write    :** checks write functionality by unauth user (i.e HBASE in this case)
+- **run_command:**  
+  Executes all necessary HDFS commands inside the containers.
 
-**test_unauthorized_read     :** checks read functionality by unauth user
+---
 
-**test_cleanup               :** final cleanup of EZ and files present in it
+## Test Cases
+
+### ✅ Positive Test Cases
+
+1. **test_create_encryption_zone:**  
+   Creates an Encryption Zone (EZ) using an existing EZ key.
+
+2. **test_grant_permissions:**  
+   Grants read-write permissions to a specific user (e.g., HIVE) within the EZ.
+
+3. **test_hive_user_write_read:**  
+   Performs write and read operations inside the EZ using the authorized HIVE user.
+
+---
+
+### ❌ Negative Test Cases
+
+1. **test_unauthorized_write:**  
+   Attempts to write inside the EZ using an unauthorized user (e.g., HBASE). Validates expected denial of access.
+
+2. **test_unauthorized_read:**  
+   Attempts to read inside the EZ using an unauthorized user. Validates expected denial of access.
+
+---
+
+### 🧹 Cleanup
+
+- **test_cleanup:**  
+  Cleans up the Encryption Zone and all files created during testing.  
+  Ensures the test environment is reset for clean re-runs.
+
+---
+
+## Summary
+
+This test suite ensures that **HDFS encryption and access control mechanisms** function as expected, validating both authorized and unauthorized access scenarios while maintaining a clean and reusable test environment.
+
 
 
 
