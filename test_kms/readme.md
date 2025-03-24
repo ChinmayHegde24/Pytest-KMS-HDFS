@@ -32,7 +32,7 @@ Handles key creation operation
 has a class TestKeyManagement consisting of two methods 
   **1.test_create_key          :**  used to create key with necessary payload ,checks for error in that & cleans up created key
   
-  **2.test_key_name_validation :**  validates creation of key with different valid and invalid name format 
+  **2.test_key_name_validation :**  validates creation of key with different valid and invalid name format
 
 similarly different kind of validation can be done upon the key
 
