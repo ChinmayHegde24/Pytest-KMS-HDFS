@@ -1,12 +1,12 @@
-#     --KMS API & HDFS Encryption Pytest Suite--
+#    KMS API & HDFS Encryption Pytest Suite
 
 
 This test suite validates REST API endpoints for KMS (Key Management Service) and tests HDFS encryption functionalities including key management and file operations within encryption zones.
 
-test_kms  : contains test cases for checking KMS API functionality
-test_hdfs : contains test cases for checking hdfs encryption
+**test_kms  :** contains test cases for checking KMS API functionality
+**test_hdfs :** contains test cases for checking hdfs encryption
 
-📂 Directory Structure
+## 📂 Directory Structure
 
 ```
 test_directory/ ├── test_kms/ # Tests on KMS API
@@ -21,13 +21,13 @@ test_directory/ ├── test_kms/ # Tests on KMS API
 | ├── README.md              # This file ```
 
 
-⚙️ Setup Instructions
+## ⚙️ Setup Instructions
 Bring up KMS container and any dependent containers using Docker.
 Create a virtual environment and install the necessary packages: requests pytest docker
 
 Further Environment setup  done in test suite itself no need to add extra things
 
-# Run test cases
+## Run test cases
 
 to run tests in test_kms folder 
 > pytest -vs test_kms/
@@ -42,7 +42,7 @@ to run tests in test_hdfs folder
 > set this as KMS URL in UI:  kms://http@host.docker.internal:9292/kms 
 
 
-Now simply run
+## Now simply run
 > pytest -vs -k "test_encryption"
 or
 >pytest -vs test_hdfs/
