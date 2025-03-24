@@ -31,7 +31,7 @@ class TestKeyManagement:
         ("valid-key", 201),
         ("", 400),                                     # Invalid case: Empty name
         ("@invalid!", 400),                            # Invalid case: Special characters
-        ("invalid--key",400)                               #-- or __ or _- -_ not allowed        
+        ("invalid--key",400)                           #-- or __ or _- -_ not allowed        
     ])
     def test_key_name_validation(self, headers, name, expected_status):
         key_data = {
