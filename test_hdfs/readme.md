@@ -19,17 +19,6 @@ test_hdfs/
 
 ---
 
-## `test_encryption.py`
-
-Handles the **full HDFS encryption cycle**, including setup, positive and negative test scenarios, and cleanup.
-
-### Main Highlights:
-- Encryption Zone (EZ) creation in HDFS.
-- Granting permissions to specific users for read/write operations within the EZ.
-- Validating read/write attempts by unauthorized users inside the EZ.
-
----
-
 ### `setup_environment`
 
 Handled in `Conftest.py` file
@@ -49,6 +38,16 @@ Before running the test cases, some environment configurations are needed:
   Executes all necessary HDFS commands inside the containers.
 
 ---
+
+## `test_encryption.py`
+
+Handles the **full HDFS encryption cycle**, including setup, positive and negative test scenarios, and cleanup.
+
+### Main Highlights:
+- Encryption Zone (EZ) creation in HDFS.
+- Granting permissions to specific users for read/write operations within the EZ.
+- Validating read/write attempts by unauthorized users inside the EZ.
+
 
 ## Test Cases
 
