@@ -20,8 +20,8 @@ test_directory/
   ├── readme.md
 ├── test_hdfs/               # Tests on HDFS encryption cycle
   ├── test_encryption.py     # Full HDFS encryption cycle testing
-  ├── test_config.py         #stores all constants and HDFS commands
-  ├── conftest.py            #sets up the environment
+  ├── test_config.py         # stores all constants and HDFS commands
+  ├── conftest.py            # sets up the environment
   ├── readme.md
 ├── pytest.ini               # Registers custom pytest markers
 ├── requirements.txt
@@ -47,10 +47,12 @@ to run with report included
 or
 >pytest -vs test_hdfs/
 
-With report >pytest -vs test_hdfs/ --html=hdfs-report.html
+to run with report included
+>pytest -vs test_hdfs/ --html=hdfs-report.html
 
 📌 Notes
 Ensure Docker containers for KMS and HDFS are running before executing tests.
+
 Reports generated using --html can be viewed in any browser for detailed test results.
 
 
