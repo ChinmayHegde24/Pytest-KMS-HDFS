@@ -17,17 +17,19 @@ test_directory/
   ├── test_keyOps.py         # Key operations: Roll-over, generate DEK, Decrypt EDEK
   ├── conftest.py            # Reusable fixtures and setup
   ├── utils.py               # Utility methods
+  ├── readme.md
 ├── test_hdfs/               # Tests on HDFS encryption cycle
   ├── test_encryption.py     # Full HDFS encryption cycle testing
-  ├── pytest.ini             # Registers custom pytest markers
-  ├── README.md              # This file
+  ├── test_config.py         #stores all constants and HDFS commands
+  ├── conftest.py            #sets up the environment
+  ├── readme.md
+├── pytest.ini               # Registers custom pytest markers
+├── README.md                # This file
 ```
 
 ## ⚙️ Setup Instructions
-Bring up KMS container and any dependent containers using Docker.
-Create a virtual environment and install the necessary packages: requests pytest docker
-
-Further Environment setup  done in test suite itself no need to add extra things
+Bring up KMS,Hadoop containers and any dependent containers using Docker.
+Create a virtual environment and install the necessary packages through requirements.txt
 
 ## Run test cases
 
