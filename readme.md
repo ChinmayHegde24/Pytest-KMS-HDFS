@@ -24,6 +24,7 @@ test_directory/
   ├── conftest.py            #sets up the environment
   ├── readme.md
 ├── pytest.ini               # Registers custom pytest markers
+├── requirements.txt
 ├── README.md                # This file
 ```
 
